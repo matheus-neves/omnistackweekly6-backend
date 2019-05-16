@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const path = require("path");
+const path = require('path');
 const cors = require('cors');
 
 const app = express();
@@ -8,22 +8,22 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-io.on('connection', socket => {
-  socket.on('connectRoom', box => {
+io.on('connection', (socket) => {
+  socket.on('connectRoom', (box) => {
     socket.join(box);
-  })
-})
+  });
+});
 
-mongoose.connect("mongodb+srv://omnistack:omnistack@cluster0-cntnl.mongodb.net/omnistack?retryWrites=true", {
-  useNewUrlParser: true
-})
+mongoose.connect('mongodb+srv://omnistack:omnistack@cluster0-cntnl.mongodb.net/omnistack?retryWrites=true', {
+  useNewUrlParser: true,
+});
 
 // Define o io como global nas requisicões
 app.use((req, res, next) => {
   req.io = io;
 
   return next();
-})
+});
 
 // middlewares
 app.use(cors());
